@@ -1,0 +1,53 @@
+doctype html
+html(lang="en")
+  head
+    title My Portfolio
+    link(rel="stylesheet" href="/css/style.css")
+  body
+    header
+      h1 My Portfolio
+
+    .container
+      .column
+        h2 Add Project
+        form(action="/add-project", method="POST")
+          label(for="title") Title:
+          input(type="text", name="title", required)
+
+          label(for="description") Description:
+          input(type="text", name="description", required)
+
+          label(for="year") Year:
+          input(type="number", name="year", required)
+
+          label(for="link") Project Link:
+          input(type="url", name="link")
+
+          input(type="submit", value="Add Project")
+
+        h3 Recently Added Projects
+        if projects.length
+          each project in projects
+            p #{project.title} - #{project.description}
+
+      .column
+        h2 Add Skill
+        form(action="/add-skill", method="POST")
+          label(for="name") Skill Name:
+          input(type="text", name="name", required)
+
+          label(for="proficiency") Proficiency:
+          select(name="proficiency", required)
+            option(value="Beginner") Beginner
+            option(value="Intermediate") Intermediate
+            option(value="Advanced") Advanced
+
+          input(type="submit", value="Add Skill")
+
+        h3 Recently Added Skills
+        if skills.length
+          each skill in skills
+            p #{skill.name} - #{skill.proficiency}
+
+    footer
+      p &copy; 2024 My Portfolio

@@ -1,0 +1,13 @@
+doctype html
+html(lang="en")
+  head
+    title Details
+  body
+    header
+
+    .container
+      h2= type + " Details in JSON"
+      pre
+        code= JSON.stringify(data, null, 2)
+    footer
+      a(href="/") Back
