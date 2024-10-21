@@ -36,8 +36,8 @@
     "touch": "^3.1.1",
     "undefsafe": "^2.0.5"
   },
-"scripts": {
-  "start": "node index.js"
+  "scripts": {
+    "dev": "nodemon ./index.js"
   },
   "author": "Anmol V",
   "license": "ISC",
