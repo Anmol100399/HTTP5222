@@ -37,6 +37,29 @@ app.get("/", async (request, response) => {
 
   response.render("index", { projects: projectList, skills: skillList });
 });
+app.get("/projects", async (request, response) => {
+  let projectList = await projectDb.getProjects();
+
+  if (!projectList.length) {
+    await projectDb.initializeProjects();
+    projectList = await projectDb.getProjects();
+  }
+  projectList = projectList.slice(-1);
+
+  response.json({ projects: projectList});
+
+});
+app.get("/skills", async (request, response) => {
+  let skillList = await skillDb.getSkills();
+
+  if (!skillList.length) {
+    await skillDb.initializeSkills();
+    skillList = await skillDb.getSkills();
+  }
+  skillList = skillList.slice(-1);
+
+  response.json({skills: skillList });
+});
 
 app.post("/add-skill", async (req, res) => {
   const { name, proficiency } = req.body;
