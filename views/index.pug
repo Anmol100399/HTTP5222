@@ -3,6 +3,11 @@ html(lang="en")
   head
     title My Portfolio
     link(rel="stylesheet" href="/css/style.css")
+    script.
+      function toggleContactForm() {
+        const form = document.querySelector("#contact-form");
+        form.style.display = form.style.display === "block" ? "none" : "block";
+      }
   body
     header
       h1 My Portfolio
@@ -12,29 +17,30 @@ html(lang="en")
         h2 Add Project
         form(action="/add-project", method="POST")
           label(for="title") Title:
-          input(type="text", name="title", required)
+          input(type="text", name="title", placeholder="Enter project title", required)
 
           label(for="description") Description:
-          input(type="text", name="description", required)
+          textarea(name="description", placeholder="Brief description of the project", required)
 
           label(for="year") Year:
-          input(type="number", name="year", required)
+          input(type="number", name="year", min="1900", max="2100", placeholder="e.g., 2023", required)
 
           label(for="link") Project Link:
-          input(type="url", name="link")
+          input(type="url", name="link", placeholder="https://example.com/project")
+
+          label(for="languages") Languages/Technologies:
+          input(type="text", name="languages", placeholder="e.g., HTML, CSS, JavaScript", required)
+
+          label(for="image") Screenshot (URL):
+          input(type="url", name="image", placeholder="https://example.com/image.jpg")
 
           input(type="submit", value="Add Project")
-
-        h3 Recently Added Projects
-        if projects.length
-          each project in projects
-            p #{project.title} - #{project.description}
 
       .column
         h2 Add Skill
         form(action="/add-skill", method="POST")
           label(for="name") Skill Name:
-          input(type="text", name="name", required)
+          input(type="text", name="name", placeholder="Enter skill name", required)
 
           label(for="proficiency") Proficiency:
           select(name="proficiency", required)
@@ -42,12 +48,40 @@ html(lang="en")
             option(value="Intermediate") Intermediate
             option(value="Advanced") Advanced
 
+          label(for="category") Category:
+          input(type="text", name="category", placeholder="e.g., Frontend, Backend, Tools", required)
+
+          label(for="yearsExperience") Years of Experience:
+          input(type="number", name="yearsExperience", min="0", placeholder="e.g., 2", required)
+
           input(type="submit", value="Add Skill")
 
-        h3 Recently Added Skills
-        if skills.length
-          each skill in skills
-            p #{skill.name} - #{skill.proficiency}
+<button class="contact-btn" onclick="toggleContactForm()">Contact</button>
 
+<div class="contact-form-container">
+  <button class="close-contact-form" onclick="closeContactForm()">X</button>
+  <form action="/contact" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" placeholder="Your Name" required>
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" placeholder="Your Email" required>
+    
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+    
+    <input type="submit" value="Send Message">
+  </form>
+</div>
+    script.
+      function toggleContactForm() {
+        const form = document.querySelector('.contact-form-container');
+        form.style.display = 'block'; // Show the form
+      }
+
+      function closeContactForm() {
+        const form = document.querySelector('.contact-form-container');
+        form.style.display = 'none'; // Hide the form
+      }
     footer
       p &copy; 2024 My Portfolio
