@@ -2,7 +2,6 @@ const express = require("express");
 const path = require("path");
 const dotenv = require("dotenv");
 const cors = require('cors');
-app.use(cors());
 
 dotenv.config();
 
@@ -13,6 +12,7 @@ const app = express();
 const port = process.env.PORT || "8888";
 
 app.use(express.json());
+app.use(cors({ origin: 'http://localhost:5173', methods: ['GET', 'POST'] }));
 app.use(express.urlencoded({ extended: true }));
 
 app.set("views", path.join(__dirname, "views"));
