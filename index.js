@@ -35,9 +35,7 @@ app.get("/", async (req, res) => {
     skillList = await skillDb.getSkills();
   }
 
-  projectList = projectList.slice(-1);
-  skillList = skillList.slice(-1);
-
+  // Removed the slice(-1) to get all the data
   res.render("index", { projects: projectList, skills: skillList });
 });
 
@@ -49,7 +47,7 @@ app.get("/projects", async (req, res) => {
     projectList = await projectDb.getProjects();
   }
 
-  projectList = projectList.slice(-1);
+  // Removed the slice(-1) to get all the data
   res.json({ projects: projectList });
 });
 
@@ -61,7 +59,7 @@ app.get("/skills", async (req, res) => {
     skillList = await skillDb.getSkills();
   }
 
-  skillList = skillList.slice(-1);
+  // Removed the slice(-1) to get all the data
   res.json({ skills: skillList });
 });
 
